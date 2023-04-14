@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="./styles/style.css" rel="stylesheet">
+  <link href="./styles/media.css" rel="stylesheet">
+  <script type="text/javascript" src="js/post.js"></script>
+  <title>Cabaña</title>
+</head>
+<body>
+<header>
+  <div id="title">
+    <h1>Antonativa</h1>
+    <h1>Balanza</h1>
+  </div>
+
+  <ul>
+    <a href="#"><li>Notificaciones</li></a>
+    <a href="#"><li>Lista etiquetas</li></a>
+    <a href="#" id="inscreva-se-btn"><li>Imprimir</li></a>
+  </ul>
+</header>
+
+<main>
+  <aside>
+    <h2><span>Crear una nueva</span></h2>
+    <h2>Etiqueta</h2>
+    <p>
+      Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
+    </p>
+    <form id="etiqueta">
+        <article class="caja">
+          <div class="input-container">
+            <input class= "text-input" id="producto" type="text" name="producto" placeholder="Ej: P32J/1">
+            <label class="label" for="producto">Producto</label>
+          </div>
+        </article>
+
+        <article class="caja">
+          <div class="input-container">
+            <input class= "text-input" id="lote" type="text" name="lote" placeholder="Ej:4575">
+            <label class="label" for="lote">Lote:</label>
+          </div>
+
+          <div class="input-container">
+            <input class= "text-input" id="fechaVencimiento" type="date" name="fechaVencimiento" placeholder="Ingrese un nombre">
+            <label class="label" for="fechaVencimiento">Fecha Vencimiento:</label>
+          </div>
+        </article>
+
+        <article class="caja">
+          <div class="input-container">
+            <input class= "text-input" id="operario" type="text" name="operario" placeholder="Ej: 45">
+            <label class="label" for="operario">Operario:</label>
+          </div>
+        </article>
+      <button type="submit" class="btn btn-danger" id="btn-add-new-premio">Guardar</button>
+    </form>
+    <div id="response" style="display:none; margin-top:10px">
+  </aside>
+
+  <article class="impresora">
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+    <lottie-player src="https://assets4.lottiefiles.com/packages/lf20_pycljfli.json"  background="transparent"  speed="1"  style="width: 300px; height: 300px;" loop autoplay></lottie-player>
+  </article>
+</main>
+
+</body>
+</html>

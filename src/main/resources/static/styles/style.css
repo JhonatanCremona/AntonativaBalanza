@@ -1,0 +1,227 @@
+body{
+    background-color: rgb(15, 15, 15);
+    color: white;
+    font-family: poppinsregular;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 15px;
+}
+
+header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#title{
+    flex-direction: column;
+    line-height: 10px;
+}
+
+li{
+    display: inline-block;
+    margin: 20px;
+}
+
+a{
+    color: white;
+}
+
+a:hover{
+    color: rgb(132, 14, 201);
+    transition: 0.3s all;
+}
+
+#inscreva-se-btn{
+    border: 2px solid rgb(132, 14, 201);
+    padding: 10px;
+    border-radius: 15px;
+}
+
+#inscreva-se-btn:hover{
+    background-color: rgb(132, 14, 201);
+    color: white;
+}
+
+h1{
+    font-weight: 200;
+}
+
+main{
+    display: flex;
+    flex-direction: row;
+    margin-top: 50px;
+}
+
+h2{
+    font-size: 56px;
+    line-height: 10px;
+    font-family: poppinsmedium;
+}
+
+span{
+    color: rgb(132, 14, 201);
+}
+
+p{
+    line-height: 20px;
+    max-width: 500px;
+    font-family: poppinslight;
+    margin-bottom: 50px;
+}
+
+img{
+    width: 580px;
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+}
+
+form [type="submit"]{
+    height: 50px;
+    width: 50%;
+    background-color: rgb(132, 14, 201);
+    color: white;
+    font-weight: bold;
+}
+form [type="submit"]:hover{
+    cursor: pointer;
+}
+
+input{
+    margin-top: 20px;
+    height: 20px;
+    border-radius: 20px;
+    border: none;
+    font-size: 15px;
+}
+.impresora{
+    margin-top: 200px;
+}
+lottie-player {
+    margin: 0 auto;
+    width: 600px !important;
+    height: 600px !important;
+}
+main {
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid yellow;
+}
+aside {
+    width:60%;
+}
+
+form {
+    margin: auto;
+    min-width: 500px ;
+    border: 1px solid blue;
+    padding: 5%;
+    padding-right: 6.5%;
+    border-radius: 20px;
+}
+.caja {
+    display: flex;
+    justify-content: space-between;
+    margin: 30px 0 30px 0px;
+}
+
+.input-container {
+    width: 210px;
+    max-height: 40px;
+    position: relative;
+    margin: 18px 0;
+    border: 1px solid tomato;
+}
+
+
+.label {
+    position: absolute;
+    left: 10px;
+    top: 25px;
+    transition: all 0.2s;
+    padding: 0 2px;
+    z-index: 10;
+    color: rgb(77, 77, 77);
+    font-size: 18px;
+    width: 100%;
+}
+.text-input {
+    height: 100%;
+    
+    border: 1px solid rgb(77, 77, 77);
+    background: rgb(15, 15, 15);
+    border-radius: 5px;
+    font-size: 18px;
+    outline: none;
+    transition: all 0.3s;
+    color: #323f52;
+    width: 100%;
+}
+
+.text-input:focus {
+    border: 2px solid rgb(132, 14, 201);
+
+}
+.text-input:focus + .label, .filled {
+    top: -5px;
+    color: rgb(132, 14, 201);
+    font-weight: bold;
+    letter-spacing:0.1rem;
+    font-size: 18px;
+}
+.text-input::placeholder {
+    font-size: 16px;
+    opacity: 0;
+    transition: all 0.3s;
+}
+.text-input:focus::placeholder {
+    opacity: 1;
+}
+button {
+    margin: 20px 0;
+    background: rgb(15, 15, 15);
+    cursor: pointer;
+    border: none;
+    color: #fff;
+    padding: 10px 0;
+    font-size: 20px;
+    font-weight: 400;
+    position: relative;
+    border-radius: 12px;
+    width: 50%;
+    height: 50px;
+}
+button::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        45deg,
+        red,blue,deeppink,blue,
+        red,blue,deeppink,blue
+    );
+    background-size: 800%;
+    border-radius: 10px;
+    filter: blur(8px);
+    animation: glowing 20s linear infinite;
+}
+@keyframes glowing {
+    0% {
+        background-position: 0 0;
+    }
+    50% {
+        background-position: 400% 0;
+    }
+    100% {
+        background-position: 0 0;
+    }
+}
