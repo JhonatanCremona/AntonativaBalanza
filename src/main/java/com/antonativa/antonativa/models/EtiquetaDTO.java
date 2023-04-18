@@ -13,4 +13,5 @@ public class EtiquetaDTO {
     private String lote;
     private Date fechaVencimiento;
     private String operario;
+
 }

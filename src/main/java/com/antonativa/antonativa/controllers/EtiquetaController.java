@@ -1,8 +1,10 @@
 package com.antonativa.antonativa.controllers;
 
 
+import com.antonativa.antonativa.models.Etiqueta;
 import com.antonativa.antonativa.models.EtiquetaDTO;
 import com.antonativa.antonativa.services.EtiquetaService;
+import com.antonativa.antonativa.settings.impresion.ImpresionInmediata;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -40,6 +42,15 @@ public class EtiquetaController {
         etiquetaService.eliminar(id);
 
         return "Se ha eliminado exitosamente la etiqueta";
+
+    }
+
+    @GetMapping("/imprimir/{id}")
+    public String imprimir(@PathVariable Long id) {
+
+        ImpresionInmediata.imprimirEtiqueta(etiquetaService.obtenerEtiqueta(id));
+
+        return "Impresion realizada";
 
     }
 

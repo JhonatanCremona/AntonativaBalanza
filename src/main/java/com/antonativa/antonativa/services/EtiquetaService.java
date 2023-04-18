@@ -57,6 +57,12 @@ public class EtiquetaService implements IEtiquetaService {
 
     }
 
+    public Etiqueta obtenerEtiqueta(Long id) {
+
+        return etiquetaRepository.findById(id).get();
+
+    }
+
     public String getPesoNeto() {
 
         final String HOST = "192.168.0.103";
