@@ -17,8 +17,6 @@ import java.util.logging.Logger;
 @Service
 public class EtiquetaService implements IEtiquetaService {
 
-
-
     @Autowired
     EtiquetaRepository etiquetaRepository;
 
@@ -29,6 +27,7 @@ public class EtiquetaService implements IEtiquetaService {
         return etiquetaRepository.save(etiqueta);
     }*/
     private void saveEtiqueta(EtiquetaDTO etiquetaDTO) {
+        Etiqueta newEtiquetas;
         Etiqueta newEtiqueta = mapper.convertValue(etiquetaDTO, Etiqueta.class);
         etiquetaRepository.save(newEtiqueta);
         etiquetaRepository.findAll();
@@ -37,12 +36,6 @@ public class EtiquetaService implements IEtiquetaService {
     public void createEtiqueta(EtiquetaDTO eDto) {
         saveEtiqueta(eDto);
     }
-
-
-
-    /*public Iterable<Etiqueta> findAll() {
-        return etiquetaRepository.findAll();
-    }*/
 
     @Override
     public Collection<EtiquetaDTO> getAllEtiqueta() {
@@ -60,8 +53,7 @@ public class EtiquetaService implements IEtiquetaService {
     }
 
     public void eliminar(Long id) {
-
-        etiquetaRepository.delete(findById(id));
+        etiquetaRepository.deleteById(id);
 
     }
 

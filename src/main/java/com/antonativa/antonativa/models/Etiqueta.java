@@ -26,6 +26,7 @@ public class Etiqueta {
     private String pesoNeto;
     private String operario;
     private LocalDateTime fechaActual;
+    private boolean estado = false;
 
     public Etiqueta() {
 

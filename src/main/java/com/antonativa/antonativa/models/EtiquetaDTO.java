@@ -7,6 +7,7 @@ import java.sql.Date;
 @Getter
 @Setter
 public class EtiquetaDTO {
+    private Long id;
     private String nameEtiqueta;
     private String producto;
     private String lote;
