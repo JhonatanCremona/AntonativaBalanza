@@ -27,25 +27,23 @@ public class Etiqueta {
     private String pesoNeto;
     private String operario;
     private LocalDateTime fechaActual;
-    private boolean estado = false;
+    private boolean estado;
 
     public Etiqueta() {
 
         fechaActual = LocalDateTime.now();
+        estado = true;
 
     }
 
     @Override
     public String toString() {
-        return  "ID: " + id + "\n" +
-                "Nombre Etiqueta: " + nameEtiqueta + "\n" +
-                "Producto: " + producto + "\n" +
+        return  "Producto: " + producto + "\n" +
                 "Lote: " + lote + "\n" +
                 "Fecha Vencimiento: " + fechaVencimiento + "\n" +
                 "PesoNeto: " + pesoNeto + "\n" +
                 "Operario: " + operario + "\n" +
-                "FechaActual: " + fechaActual.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss")) + "\n" +
-                "Estado: " + estado;
+                "FechaActual: " + fechaActual.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss")) + "\n";
     }
 
 }

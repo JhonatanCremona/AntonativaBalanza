@@ -3,6 +3,7 @@ package com.antonativa.antonativa.controllers;
 
 import com.antonativa.antonativa.models.Etiqueta;
 import com.antonativa.antonativa.models.EtiquetaDTO;
+import com.antonativa.antonativa.repository.EtiquetaRepository;
 import com.antonativa.antonativa.services.EtiquetaService;
 import com.antonativa.antonativa.settings.impresion.ImpresionInmediata;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,8 @@ public class EtiquetaController {
 
     @Autowired
     public EtiquetaService etiquetaService;
+    @Autowired
+    EtiquetaRepository etiquetaRepository;
 
     @PostMapping("/guardar")
     /*public Etiqueta saveEtiqueta(@RequestBody Etiqueta etiqueta) {
@@ -45,10 +48,24 @@ public class EtiquetaController {
 
     }
 
-    @GetMapping("/imprimir/{id}")
-    public String imprimir(@PathVariable Long id) {
+    @GetMapping("/imprimir")
+    public String imprimir() {
 
-        ImpresionInmediata.imprimirEtiqueta(etiquetaService.obtenerEtiqueta(id));
+        for (Etiqueta etiqueta : etiquetaRepository.findAll()) {
+
+            if (etiqueta.isEstado()) {
+
+                etiqueta.setPesoNeto(etiquetaService.getPesoNeto());
+
+                if(etiqueta.getPesoNeto() != null) {
+
+                    ImpresionInmediata.imprimirEtiqueta(etiqueta);
+
+                }
+
+            }
+
+        }
 
         return "Impresion realizada";
 
