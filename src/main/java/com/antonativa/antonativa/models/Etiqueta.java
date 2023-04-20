@@ -18,7 +18,7 @@ import java.time.format.DateTimeFormatter;
 public class Etiqueta {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String nameEtiqueta;
     private String producto;
@@ -32,7 +32,7 @@ public class Etiqueta {
     public Etiqueta() {
 
         fechaActual = LocalDateTime.now();
-        estado = true;
+        estado = false;
 
     }
 

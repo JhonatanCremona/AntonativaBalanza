@@ -48,8 +48,10 @@ public class EtiquetaController {
 
     }
 
-    @GetMapping("/imprimir")
-    public String imprimir() {
+    @GetMapping("/imprimir/{id}")
+    public String imprimir(@PathVariable long id) {
+
+        etiquetaService.setEstadoById(id);
 
         for (Etiqueta etiqueta : etiquetaRepository.findAll()) {
 

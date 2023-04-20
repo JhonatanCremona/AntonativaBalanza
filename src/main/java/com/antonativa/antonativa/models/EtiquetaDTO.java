@@ -14,4 +14,6 @@ public class EtiquetaDTO {
     private Date fechaVencimiento;
     private String operario;
 
+    private Boolean estado;
+
 }

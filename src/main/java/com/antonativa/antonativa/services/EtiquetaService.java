@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.net.Socket;
+import java.time.LocalDateTime;
 import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -65,7 +66,7 @@ public class EtiquetaService implements IEtiquetaService {
 
     public String getPesoNeto() {
 
-        final String HOST = "192.168.0.43";
+        final String HOST = "192.168.0.61";
         final int PORT = 8081;
         DataInputStream in;
         byte[] mensaje;
@@ -84,6 +85,35 @@ public class EtiquetaService implements IEtiquetaService {
         }
 
         return null;
+
+    }
+
+    public void setEstadoById(long id) {
+
+        Etiqueta etiquetaTemp;
+
+        for (Etiqueta etiqueta : etiquetaRepository.findAll()) {
+
+            if (etiqueta.getId() == id) {
+
+                etiquetaTemp = new Etiqueta(etiqueta.getId(), etiqueta.getNameEtiqueta(), etiqueta.getProducto(),
+                                            etiqueta.getLote(), etiqueta.getFechaVencimiento(), etiqueta.getPesoNeto(),
+                                            etiqueta.getOperario(), LocalDateTime.now(), true);
+
+                etiquetaRepository.deleteById(id);
+                etiquetaRepository.save(etiquetaTemp);
+
+            } else {
+
+                etiquetaTemp = new Etiqueta(etiqueta.getId(), etiqueta.getNameEtiqueta(), etiqueta.getProducto(),
+                        etiqueta.getLote(), etiqueta.getFechaVencimiento(), etiqueta.getPesoNeto(),
+                        etiqueta.getOperario(), LocalDateTime.now(), false);
+
+                etiquetaRepository.deleteById(id);
+                etiquetaRepository.save(etiquetaTemp);
+            }
+
+        }
 
     }
 
