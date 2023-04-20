@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.net.Socket;
-import java.time.LocalDateTime;
 import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -28,7 +27,6 @@ public class EtiquetaService implements IEtiquetaService {
         return etiquetaRepository.save(etiqueta);
     }*/
     private void saveEtiqueta(EtiquetaDTO etiquetaDTO) {
-        Etiqueta newEtiquetas;
         Etiqueta newEtiqueta = mapper.convertValue(etiquetaDTO, Etiqueta.class);
         etiquetaRepository.save(newEtiqueta);
         etiquetaRepository.findAll();
@@ -41,7 +39,7 @@ public class EtiquetaService implements IEtiquetaService {
     @Override
     public Collection<EtiquetaDTO> getAllEtiqueta() {
         List<Etiqueta> allEtiquetas = (List<Etiqueta>) etiquetaRepository.findAll();
-        Set<EtiquetaDTO> allEtiquetasDto = new HashSet<EtiquetaDTO>();
+        Set<EtiquetaDTO> allEtiquetasDto = new HashSet<>();
         for (Etiqueta etiqueta : allEtiquetas) {
             allEtiquetasDto.add(mapper.convertValue(etiqueta, EtiquetaDTO.class));
         }
@@ -67,7 +65,7 @@ public class EtiquetaService implements IEtiquetaService {
     public String getPesoNeto() {
 
         final String HOST = "192.168.0.61";
-        final int PORT = 8081;
+        final int PORT = 8082;
         DataInputStream in;
         byte[] mensaje;
 
@@ -90,27 +88,18 @@ public class EtiquetaService implements IEtiquetaService {
 
     public void setEstadoById(long id) {
 
-        Etiqueta etiquetaTemp;
-
         for (Etiqueta etiqueta : etiquetaRepository.findAll()) {
+
+            System.out.println(etiqueta.isEstado() + " " + etiqueta.getOperario());
 
             if (etiqueta.getId() == id) {
 
-                etiquetaTemp = new Etiqueta(etiqueta.getId(), etiqueta.getNameEtiqueta(), etiqueta.getProducto(),
-                                            etiqueta.getLote(), etiqueta.getFechaVencimiento(), etiqueta.getPesoNeto(),
-                                            etiqueta.getOperario(), LocalDateTime.now(), true);
-
-                etiquetaRepository.deleteById(id);
-                etiquetaRepository.save(etiquetaTemp);
+                etiquetaRepository.setEstadoById(id, true);
 
             } else {
 
-                etiquetaTemp = new Etiqueta(etiqueta.getId(), etiqueta.getNameEtiqueta(), etiqueta.getProducto(),
-                        etiqueta.getLote(), etiqueta.getFechaVencimiento(), etiqueta.getPesoNeto(),
-                        etiqueta.getOperario(), LocalDateTime.now(), false);
+                etiquetaRepository.setEstadoById(etiqueta.getId(),false);
 
-                etiquetaRepository.deleteById(id);
-                etiquetaRepository.save(etiquetaTemp);
             }
 
         }

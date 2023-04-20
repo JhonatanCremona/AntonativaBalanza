@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
+import java.util.Scanner;
 
 
 @RestController
@@ -53,7 +54,13 @@ public class EtiquetaController {
 
         etiquetaService.setEstadoById(id);
 
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Pausa:");
+        sc.next();
+
         for (Etiqueta etiqueta : etiquetaRepository.findAll()) {
+
+            System.out.println(etiqueta.isEstado() + " " + etiqueta.getOperario());
 
             if (etiqueta.isEstado()) {
 
