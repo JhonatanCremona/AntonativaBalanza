@@ -12,7 +12,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
-import java.util.Scanner;
 
 
 @RestController
@@ -35,9 +34,6 @@ public class EtiquetaController {
     }
 
     @GetMapping("/listar")
-    /*public Iterable<Etiqueta> findAll() {
-        return etiquetaService.findAll();
-    }*/
     public Collection<EtiquetaDTO> listEtiquetas() {return etiquetaService.getAllEtiqueta();}
 
     @DeleteMapping("/{id}")

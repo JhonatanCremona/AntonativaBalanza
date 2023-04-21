@@ -1,6 +1,8 @@
 package com.antonativa.antonativa.settings.impresion;
 
+import com.antonativa.antonativa.controllers.SettingsController;
 import com.antonativa.antonativa.models.Etiqueta;
+import com.antonativa.antonativa.models.Settings;
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.Document;
@@ -19,8 +21,10 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 public class ImpresionInmediata {
-
     private final static Logger LOGGER = Logger.getLogger("settings.impresioninmediata.ImpresionInmediata");
+    Settings impresoraSettings = new Settings();
+
+    public SettingsController settingsController = new SettingsController();
 
     public static void imprimirEtiqueta(Etiqueta etiqueta) {
         ImpresionInmediata printer = new ImpresionInmediata();
@@ -41,11 +45,13 @@ public class ImpresionInmediata {
 
         PDDocument document = PDDocument.load(bais);
 
-        PrintService myPrintService = this.findPrintService("SATO CG408"); //SATO CG408
         PrinterJob printerJob = PrinterJob.getPrinterJob();
 
         printerJob.setPageable(new PDFPageable(document));
-        printerJob.setPrintService(myPrintService);
+
+        printerJob.setPrintService(PrintServiceLookup.lookupDefaultPrintService());
+
+        settingsController.setSettings(impresoraSettings);
 
         printerJob.print();
 
@@ -54,12 +60,15 @@ public class ImpresionInmediata {
     private PrintService findPrintService(String printerName) {
         PrintService[] printServices = PrintServiceLookup.lookupPrintServices(null, null);
         for (PrintService printService : printServices) {
+
             System.out.println(printService.getName());
 
             if (printService.getName().trim().equals(printerName)) {
+                impresoraSettings.setEstadoImpresora(true);
                 return printService;
             }
         }
+
         return null;
     }
 
