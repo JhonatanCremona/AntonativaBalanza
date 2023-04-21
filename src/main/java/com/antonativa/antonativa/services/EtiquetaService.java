@@ -90,8 +90,6 @@ public class EtiquetaService implements IEtiquetaService {
 
         for (Etiqueta etiqueta : etiquetaRepository.findAll()) {
 
-            System.out.println(etiqueta.isEstado() + " " + etiqueta.getOperario());
-
             if (etiqueta.getId() == id) {
 
                 etiquetaRepository.setEstadoById(id, true);
