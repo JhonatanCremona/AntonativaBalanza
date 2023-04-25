@@ -80,9 +80,9 @@ public class ImpresionInmediata {
         PdfDocument pdfDoc = new PdfDocument(pdfWriter);
 
         Document documento = new Document(pdfDoc);
-        documento.setMargins(0F, 0F, 0F, 60F);
+        documento.setMargins(15F, 0F, 0F, 25F);
 
-        documento.add(new Paragraph(etiqueta.toString()));
+        documento.add(new Paragraph(etiqueta.toString()).setFontSize(15F));
 
         documento.close();
 

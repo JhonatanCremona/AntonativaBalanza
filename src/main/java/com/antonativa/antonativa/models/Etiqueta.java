@@ -6,7 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.sql.Date;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -23,7 +23,7 @@ public class Etiqueta {
     private String nameEtiqueta;
     private String producto;
     private String lote;
-    private Date fechaVencimiento;
+    private LocalDate fechaVencimiento;
     private String pesoNeto;
     private String operario;
     private LocalDateTime fechaActual;
@@ -40,10 +40,11 @@ public class Etiqueta {
     public String toString() {
         return  "Producto: " + producto + "\n" +
                 "Lote: " + lote + "\n" +
-                "Fecha Vencimiento: " + fechaVencimiento + "\n" +
+                "Fecha Vencimiento: " + fechaVencimiento.format(DateTimeFormatter.ofPattern("dd-MM-yyyy")) + "\n" +
                 "PesoNeto: " + pesoNeto + "\n" +
                 "Operario: " + operario + "\n" +
-                "FechaActual: " + fechaActual.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss")) + "\n";
+                "Fecha: " + LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")) + "\t" +
+                "Hora: " + LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss"));
     }
 
 }

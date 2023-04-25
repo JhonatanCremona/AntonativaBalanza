@@ -3,7 +3,8 @@ package com.antonativa.antonativa.models;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.sql.Date;
+import java.time.LocalDate;
+
 @Getter
 @Setter
 public class EtiquetaDTO {
@@ -11,7 +12,7 @@ public class EtiquetaDTO {
     private String nameEtiqueta;
     private String producto;
     private String lote;
-    private Date fechaVencimiento;
+    private LocalDate fechaVencimiento;
     private String operario;
 
     private Boolean estado;
