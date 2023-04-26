@@ -44,7 +44,7 @@ public class Etiqueta {
                 "PesoNeto: " + pesoNeto + "\n" +
                 "Operario: " + operario + "\n" +
                 "Fecha: " + LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")) + "\t" +
-                "Hora: " + LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss"));
+                "Hora: " + LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm"));
     }
 
 }

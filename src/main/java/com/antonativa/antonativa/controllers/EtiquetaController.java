@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.time.LocalDateTime;
 import java.util.Collection;
 
@@ -63,11 +62,15 @@ public class EtiquetaController {
             etiqueta.setPesoNeto(etiquetaService.getPesoNeto());
 
                 if(etiqueta.getPesoNeto() != null) {
-                    ImpresionInmediata.imprimirEtiqueta(etiqueta);
+
                     producto = new Producto(etiqueta.getId(), etiqueta.getProducto(),
                             etiqueta.getLote(), etiqueta.getFechaVencimiento(),
                             etiqueta.getPesoNeto(), LocalDateTime.now(), etiqueta.getOperario());
+
                     productoRepository.save(producto);
+
+                    //Se realiza la impresion
+                    ImpresionInmediata.imprimirEtiqueta(producto);
                 }
 
         }

@@ -2,15 +2,17 @@ package com.antonativa.antonativa.settings.impresion;
 
 import com.antonativa.antonativa.controllers.SettingsController;
 import com.antonativa.antonativa.models.Etiqueta;
+import com.antonativa.antonativa.models.Producto;
 import com.antonativa.antonativa.models.Settings;
+import com.itextpdf.barcodes.Barcode128;
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfWriter;
+import com.itextpdf.kernel.pdf.xobject.PdfFormXObject;
 import com.itextpdf.layout.Document;
+import com.itextpdf.layout.element.Cell;
 import com.itextpdf.layout.element.Paragraph;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.printing.PDFPageable;
-
-import javax.print.PrintService;
 import javax.print.PrintServiceLookup;
 import javax.swing.*;
 import java.awt.print.PrinterException;
@@ -18,19 +20,22 @@ import java.awt.print.PrinterJob;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import com.itextpdf.layout.element.Image;
 public class ImpresionInmediata {
     private final static Logger LOGGER = Logger.getLogger("settings.impresioninmediata.ImpresionInmediata");
     Settings impresoraSettings = new Settings();
 
     public SettingsController settingsController = new SettingsController();
 
-    public static void imprimirEtiqueta(Etiqueta etiqueta) {
+    public static void imprimirEtiqueta(Producto producto) {
         ImpresionInmediata printer = new ImpresionInmediata();
 
         try {
-            ByteArrayOutputStream documentoBytes = printer.crearDocumentoiText(etiqueta);
+            ByteArrayOutputStream documentoBytes = printer.crearDocumentoiText(producto);
             printer.imprimir(documentoBytes);
         } catch (IOException | PrinterException ex) {
             JOptionPane.showMessageDialog(null, "Error de impresion", "Error", JOptionPane.ERROR_MESSAGE);
@@ -57,22 +62,7 @@ public class ImpresionInmediata {
 
     }
 
-    private PrintService findPrintService(String printerName) {
-        PrintService[] printServices = PrintServiceLookup.lookupPrintServices(null, null);
-        for (PrintService printService : printServices) {
-
-            System.out.println(printService.getName());
-
-            if (printService.getName().trim().equals(printerName)) {
-                impresoraSettings.setEstadoImpresora(true);
-                return printService;
-            }
-        }
-
-        return null;
-    }
-
-    private ByteArrayOutputStream crearDocumentoiText(Etiqueta etiqueta) {
+    private ByteArrayOutputStream crearDocumentoiText(Producto producto) {
 
         ByteArrayOutputStream documentoBytes = new ByteArrayOutputStream();
 
@@ -82,11 +72,37 @@ public class ImpresionInmediata {
         Document documento = new Document(pdfDoc);
         documento.setMargins(15F, 0F, 0F, 25F);
 
-        documento.add(new Paragraph(etiqueta.toString()).setFontSize(15F));
+        documento.add(new Paragraph(producto.toString()).setFontSize(15F));
+        documento.add(crearCodigoBarras(pdfDoc, producto));
 
         documento.close();
 
         return documentoBytes;
+    }
+
+    /**
+     * Metodo para crear un codigo de barras en base a los datos del producto.
+     *
+     * @param pdfDoc Documento pdf que se va a utilizar para imprimir el codigo de barras.
+     * @param producto Objeto que va a aportar los datos del codigo.
+     * @return Una celda con el codigo de barras.
+     */
+    private Cell crearCodigoBarras(PdfDocument pdfDoc, Producto producto) {
+
+        Barcode128 barcode = new Barcode128(pdfDoc);
+
+        //Creacion del codigo con los datos del objeto producto.
+        barcode.setCode(producto.getNombre() + " " + producto.getLote() + " " + producto.getFechaVencimiento().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"))
+                + " " + producto.getPesoNeto() + " " + producto.getOperario() + " " + producto.getFechaActual().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"))
+                + " " + producto.getFechaActual().format(DateTimeFormatter.ofPattern("HH:mm")));
+
+        //Se determina el tipo de codigo de barras 128
+        barcode.setCodeType(Barcode128.CODE128);
+
+        PdfFormXObject barcodeObject = barcode.createFormXObject(null, null, pdfDoc);
+        Cell cell = new Cell().add(new Image(barcodeObject));
+
+        return cell;
     }
 
 }

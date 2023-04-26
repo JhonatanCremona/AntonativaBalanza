@@ -73,7 +73,7 @@ public class EtiquetaService implements IEtiquetaService {
 
             Socket sc = new Socket(HOST, PORT);
             in = new DataInputStream(sc.getInputStream());
-            mensaje = in.readNBytes(8);
+            mensaje = in.readNBytes(17);
             sc.close();
 
             return ProcesamientoDatos.procesarDatosBalanza(mensaje) + " KG";

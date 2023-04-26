@@ -8,6 +8,7 @@ import lombok.Setter;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Entity
 @Table
@@ -28,5 +29,16 @@ public class Producto {
     private LocalDateTime fechaActual;
 
     private String operario;
+
+    @Override
+    public String toString() {
+        return  "Producto: " + nombre + "\n" +
+                "Lote: " + lote + "\n" +
+                "Fecha Vencimiento: " + fechaVencimiento.format(DateTimeFormatter.ofPattern("dd-MM-yyyy")) + "\n" +
+                "PesoNeto: " + pesoNeto + "\n" +
+                "Operario: " + operario + "\n" +
+                "Fecha: " + LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")) + "\t" +
+                "Hora: " + LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm"));
+    }
 
 }
