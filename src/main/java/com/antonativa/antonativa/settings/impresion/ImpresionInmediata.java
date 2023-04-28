@@ -70,10 +70,10 @@ public class ImpresionInmediata {
         PdfDocument pdfDoc = new PdfDocument(pdfWriter);
 
         Document documento = new Document(pdfDoc);
-        documento.setMargins(15F, 0F, 0F, 25F);
+        documento.setMargins(8F, 0F, 0F, 25F);
 
-        documento.add(new Paragraph(producto.toString()).setFontSize(15F));
-        documento.add(crearCodigoBarras(pdfDoc, producto));
+        documento.add(new Paragraph(producto.toString()).setFontSize(12F));
+        documento.add(crearCodigoBarras(pdfDoc, producto).setPaddingLeft(103F));
 
         documento.close();
 
@@ -91,10 +91,7 @@ public class ImpresionInmediata {
 
         Barcode128 barcode = new Barcode128(pdfDoc);
 
-        //Creacion del codigo con los datos del objeto producto.
-        barcode.setCode(producto.getNombre() + " " + producto.getLote() + " " + producto.getFechaVencimiento().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"))
-                + " " + producto.getPesoNeto() + " " + producto.getOperario() + " " + producto.getFechaActual().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"))
-                + " " + producto.getFechaActual().format(DateTimeFormatter.ofPattern("HH:mm")));
+        barcode.setCode(String.valueOf(producto.getId()));
 
         //Se determina el tipo de codigo de barras 128
         barcode.setCodeType(Barcode128.CODE128);

@@ -4,18 +4,18 @@ import com.antonativa.antonativa.models.Producto;
 import com.antonativa.antonativa.models.Settings;
 import com.antonativa.antonativa.repository.ProductoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.Collection;
 
+@RequestMapping("/Productos")
 public class ProductoController {
 
     @Autowired
     ProductoRepository productoRepository;
 
-    @GetMapping("/listarproductos")
+    @GetMapping("/listar")
     public Collection<Producto> listProductos() {return (Collection<Producto>) productoRepository.findAll();}
 
     @DeleteMapping("/{id}")
@@ -24,6 +24,13 @@ public class ProductoController {
         productoRepository.deleteById(id);
 
         return "Se ha eliminado exitosamente el producto";
+
+    }
+
+    @GetMapping("/listarporfecha/{fecha1}/{fecha2}")
+    public Collection<Producto> listProductosByFechas(@PathVariable LocalDateTime fecha1, @PathVariable LocalDateTime fecha2) {
+
+        return productoRepository.listProductosByFecha(fecha1, fecha2);
 
     }
 
