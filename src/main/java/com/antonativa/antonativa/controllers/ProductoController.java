@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDateTime;
 import java.util.Collection;
 
-@RequestMapping("/Productos")
+@RestController
+@RequestMapping("/productos")
+@CrossOrigin
 public class ProductoController {
 
     @Autowired
