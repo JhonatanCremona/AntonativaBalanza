@@ -1,10 +1,8 @@
 package com.antonativa.antonativa.controllers;
 
-
 import com.antonativa.antonativa.models.Etiqueta;
 import com.antonativa.antonativa.models.EtiquetaDTO;
 import com.antonativa.antonativa.models.Producto;
-import com.antonativa.antonativa.repository.EtiquetaRepository;
 import com.antonativa.antonativa.repository.ProductoRepository;
 import com.antonativa.antonativa.services.EtiquetaService;
 import com.antonativa.antonativa.settings.impresion.ImpresionInmediata;
@@ -15,39 +13,34 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDateTime;
 import java.util.Collection;
 
-
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/etiquetas")
 @CrossOrigin
 public class EtiquetaController {
-
     @Autowired
     public EtiquetaService etiquetaService;
-    @Autowired
-    EtiquetaRepository etiquetaRepository;
-
     @Autowired
     ProductoRepository productoRepository;
 
     @PostMapping("/guardar")
-    /*public Etiqueta saveEtiqueta(@RequestBody Etiqueta etiqueta) {
-        return etiquetaService.save(etiqueta);
-    }*/
     public ResponseEntity<?> guardarEtiqueta(@RequestBody EtiquetaDTO etiquetaDto) {
         etiquetaService.createEtiqueta(etiquetaDto);
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
-    @GetMapping("/listar")
-    public Collection<EtiquetaDTO> listEtiquetas() {return etiquetaService.getAllEtiqueta();}
+    @GetMapping("/")
+    public ResponseEntity<Collection<EtiquetaDTO>> listEtiquetas() {return ResponseEntity.ok(etiquetaService.getAllEtiqueta());}
 
     @DeleteMapping("/{id}")
-    public String delete(@PathVariable Long id) {
-
-        etiquetaService.eliminar(id);
-
-        return "Se ha eliminado exitosamente la etiqueta";
-
+    public ResponseEntity<String> delete(@PathVariable Long id) {
+        ResponseEntity<String> response = null;
+        if (etiquetaService.obtenerEtiqueta(id)) {
+            etiquetaService.eliminar(id);
+            response = ResponseEntity.status(HttpStatus.NO_CONTENT).body("Eliminado Plantilla");
+        } else {
+            response = ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+        return response;
     }
 
     @GetMapping("/imprimir/{id}")
@@ -72,11 +65,8 @@ public class EtiquetaController {
                     //Se realiza la impresion
                     ImpresionInmediata.imprimirEtiqueta(producto);
                 }
-
         }
-
         return "Impresion realizada";
-
     }
 
 }

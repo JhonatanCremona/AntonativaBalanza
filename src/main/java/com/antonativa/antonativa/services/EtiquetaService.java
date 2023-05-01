@@ -23,9 +23,6 @@ public class EtiquetaService implements IEtiquetaService {
     @Autowired
     ObjectMapper mapper;
 
-    /*public Etiqueta save(Etiqueta etiqueta) {
-        return etiquetaRepository.save(etiqueta);
-    }*/
     private void saveEtiqueta(EtiquetaDTO etiquetaDTO) {
         Etiqueta newEtiqueta = mapper.convertValue(etiquetaDTO, Etiqueta.class);
         etiquetaRepository.save(newEtiqueta);
@@ -43,7 +40,6 @@ public class EtiquetaService implements IEtiquetaService {
         for (Etiqueta etiqueta : allEtiquetas) {
             allEtiquetasDto.add(mapper.convertValue(etiqueta, EtiquetaDTO.class));
         }
-
         return allEtiquetasDto;
     }
 
@@ -53,13 +49,10 @@ public class EtiquetaService implements IEtiquetaService {
 
     public void eliminar(Long id) {
         etiquetaRepository.deleteById(id);
-
     }
 
-    public Etiqueta obtenerEtiqueta(Long id) {
-
-        return etiquetaRepository.findById(id).get();
-
+    public boolean obtenerEtiqueta(Long id) {
+        return etiquetaRepository.findById(id).isPresent();
     }
 
     public String getPesoNeto() {

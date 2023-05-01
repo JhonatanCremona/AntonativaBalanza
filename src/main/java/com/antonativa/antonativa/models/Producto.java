@@ -21,13 +21,11 @@ public class Producto {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
     private String nombre;
     private String lote;
     private LocalDate fechaVencimiento;
     private String pesoNeto;
     private LocalDateTime fechaActual;
-
     private String operario;
 
     @Override
