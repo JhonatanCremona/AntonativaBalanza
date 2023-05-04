@@ -28,7 +28,7 @@ public class EtiquetaController {
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
-    @GetMapping("/")
+    @GetMapping("/listar")
     public ResponseEntity<Collection<EtiquetaDTO>> listEtiquetas() {return ResponseEntity.ok(etiquetaService.getAllEtiqueta());}
 
     @DeleteMapping("/{id}")
@@ -49,9 +49,9 @@ public class EtiquetaController {
         etiquetaService.setEstadoById(id);
         Etiqueta etiqueta = etiquetaService.findById(id);
         Producto producto;
-
+        System.out.println("Me encuentri aquuuu FUERA");
         if (etiqueta.isEstado()) {
-
+            System.out.println("Me encuentri aquuuu IF");
             etiqueta.setPesoNeto(etiquetaService.getPesoNeto());
 
                 if(etiqueta.getPesoNeto() != null) {

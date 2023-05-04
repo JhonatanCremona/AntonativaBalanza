@@ -35,9 +35,7 @@ public class ProductoController {
 
     @GetMapping("/listarporfecha/{fecha1}/{fecha2}")
     public Collection<Producto> listProductosByFechas(@PathVariable LocalDateTime fecha1, @PathVariable LocalDateTime fecha2) {
-
         return productoRepository.listProductosByFecha(fecha1, fecha2);
-
     }
 
 }

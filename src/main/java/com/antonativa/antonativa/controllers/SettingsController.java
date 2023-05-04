@@ -22,11 +22,6 @@ public class SettingsController {
 
     }
 
-    @PostMapping("/guardarestadoimpresora")
-    public void guardarEstadoImpresora() {
-        settingsRepository.save(this.settings);
-    }
-
     @GetMapping("/listarimpresoras")
     public Collection<Settings> listSettings() {return (Collection<Settings>) settingsRepository.findAll();}
 

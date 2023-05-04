@@ -19,5 +19,6 @@ public class Settings {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private boolean estadoImpresora;
+    private boolean estadoModuloBalanza;
 
 }

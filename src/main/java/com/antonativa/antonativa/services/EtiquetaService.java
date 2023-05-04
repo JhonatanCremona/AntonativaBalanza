@@ -56,7 +56,6 @@ public class EtiquetaService implements IEtiquetaService {
     }
 
     public String getPesoNeto() {
-
         final String HOST = "192.168.0.71";
         final int PORT = 8082;
         DataInputStream in;
@@ -66,7 +65,7 @@ public class EtiquetaService implements IEtiquetaService {
 
             Socket sc = new Socket(HOST, PORT);
             in = new DataInputStream(sc.getInputStream());
-            mensaje = in.readNBytes(17);
+            mensaje = in.readNBytes(8);
             sc.close();
 
             return ProcesamientoDatos.procesarDatosBalanza(mensaje) + " KG";
@@ -76,7 +75,6 @@ public class EtiquetaService implements IEtiquetaService {
         }
 
         return null;
-
     }
 
     public void setEstadoById(long id) {

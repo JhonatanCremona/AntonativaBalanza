@@ -16,5 +16,4 @@ public interface EtiquetaRepository extends CrudRepository<Etiqueta, Long> {
     @Query(value = "UPDATE etiqueta SET estado = :estado WHERE id = :id", nativeQuery = true)
     void setEstadoById(@Param("id") Long id, @Param("estado") boolean estado);
 
-
 }

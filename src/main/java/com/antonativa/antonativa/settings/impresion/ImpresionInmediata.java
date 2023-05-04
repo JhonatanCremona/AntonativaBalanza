@@ -1,9 +1,6 @@
 package com.antonativa.antonativa.settings.impresion;
 
-import com.antonativa.antonativa.controllers.SettingsController;
-import com.antonativa.antonativa.models.Etiqueta;
 import com.antonativa.antonativa.models.Producto;
-import com.antonativa.antonativa.models.Settings;
 import com.itextpdf.barcodes.Barcode128;
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfWriter;
@@ -20,16 +17,11 @@ import java.awt.print.PrinterJob;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import com.itextpdf.layout.element.Image;
 public class ImpresionInmediata {
     private final static Logger LOGGER = Logger.getLogger("settings.impresioninmediata.ImpresionInmediata");
-    Settings impresoraSettings = new Settings();
-
-    public SettingsController settingsController = new SettingsController();
 
     public static void imprimirEtiqueta(Producto producto) {
         ImpresionInmediata printer = new ImpresionInmediata();
@@ -55,8 +47,6 @@ public class ImpresionInmediata {
         printerJob.setPageable(new PDFPageable(document));
 
         printerJob.setPrintService(PrintServiceLookup.lookupDefaultPrintService());
-
-        settingsController.setSettings(impresoraSettings);
 
         printerJob.print();
 

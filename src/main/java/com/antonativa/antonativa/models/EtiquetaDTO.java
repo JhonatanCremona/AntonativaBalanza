@@ -14,7 +14,6 @@ public class EtiquetaDTO {
     private String lote;
     private LocalDate fechaVencimiento;
     private String operario;
-
     private Boolean estado;
 
 }
