@@ -9,9 +9,9 @@ public class ProcesamientoDatos {
 
         String datoPeso = Conversores.byteToString(bytes);
 
-        datoPeso = datoPeso.substring(7, 13);
+        datoPeso = datoPeso.substring(3, 7);
 
-        datoPeso = String.valueOf(Double.parseDouble(datoPeso));
+        datoPeso = String.valueOf(Double.parseDouble(datoPeso) / 100);
 
         return datoPeso;
 

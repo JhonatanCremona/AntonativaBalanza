@@ -49,9 +49,9 @@ public class EtiquetaController {
         etiquetaService.setEstadoById(id);
         Etiqueta etiqueta = etiquetaService.findById(id);
         Producto producto;
-        System.out.println("Me encuentri aquuuu FUERA");
+
         if (etiqueta.isEstado()) {
-            System.out.println("Me encuentri aquuuu IF");
+
             etiqueta.setPesoNeto(etiquetaService.getPesoNeto());
 
                 if(etiqueta.getPesoNeto() != null) {
