@@ -13,8 +13,8 @@ import org.springframework.stereotype.Service;
 public class SettingsService {
     @Autowired
     SettingsRepository settingsRepository;
-    @Autowired
-    Settings settings;
+
+    Settings settings = new Settings();
     private boolean resultadoConexion = false;
     private static final Logger logger = Logger.getLogger(SettingsService.class);
     private boolean conexionModulo(String IpModulo) {
