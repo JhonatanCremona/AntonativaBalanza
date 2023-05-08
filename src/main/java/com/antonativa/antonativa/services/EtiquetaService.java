@@ -81,17 +81,11 @@ public class EtiquetaService implements IEtiquetaService {
 
         for (Etiqueta etiqueta : etiquetaRepository.findAll()) {
 
-            if (etiqueta.getId() == id) {
-
-                etiquetaRepository.setEstadoById(id, true);
-
-            } else {
-
                 etiquetaRepository.setEstadoById(etiqueta.getId(),false);
 
-            }
-
         }
+
+        etiquetaRepository.findById(id).get().setEstado(true);
 
     }
 

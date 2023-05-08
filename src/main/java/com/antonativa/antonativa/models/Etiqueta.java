@@ -28,6 +28,7 @@ public class Etiqueta {
     private String operario;
     private LocalDateTime fechaActual;
     private boolean estado;
+    private String unidades;
 
     public Etiqueta() {
 

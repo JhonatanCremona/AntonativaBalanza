@@ -27,6 +27,7 @@ public class Producto {
     private String pesoNeto;
     private LocalDateTime fechaActual;
     private String operario;
+    private String unidades;
 
     @Override
     public String toString() {

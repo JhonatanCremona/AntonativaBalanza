@@ -58,7 +58,7 @@ public class EtiquetaController {
 
                     producto = new Producto(etiqueta.getId(), etiqueta.getProducto(),
                             etiqueta.getLote(), etiqueta.getFechaVencimiento(),
-                            etiqueta.getPesoNeto(), LocalDateTime.now(), etiqueta.getOperario());
+                            etiqueta.getPesoNeto(), LocalDateTime.now(), etiqueta.getOperario(), etiqueta.getUnidades());
 
                     productoRepository.save(producto);
 
@@ -66,6 +66,7 @@ public class EtiquetaController {
                     ImpresionInmediata.imprimirEtiqueta(producto);
                 }
         }
+
         return "Impresion realizada";
     }
 

@@ -15,5 +15,6 @@ public class EtiquetaDTO {
     private LocalDate fechaVencimiento;
     private String operario;
     private Boolean estado;
+    private String unidades;
 
 }

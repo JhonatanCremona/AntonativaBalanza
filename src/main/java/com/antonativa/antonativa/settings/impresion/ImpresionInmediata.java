@@ -81,7 +81,7 @@ public class ImpresionInmediata {
 
         Barcode128 barcode = new Barcode128(pdfDoc);
 
-        barcode.setCode(producto.getNombre() + " " + producto.getLote() + " " + producto.getPesoNeto().substring(0, 6) + " " + "4");
+        barcode.setCode(producto.getNombre() + " " + producto.getLote() + " " + producto.getPesoNeto().substring(0, 6) + " " + producto.getUnidades());
 
         //Se determina el tipo de codigo de barras 128
         barcode.setCodeType(Barcode128.CODE128);
