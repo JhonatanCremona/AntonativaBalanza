@@ -56,8 +56,8 @@ public class EtiquetaService implements IEtiquetaService {
     }
 
     public String getPesoNeto() {
-        final String HOST = "192.168.0.71";
-        final int PORT = 8082;
+        final String HOST = "192.168.1.25";
+        final int PORT = 3000;
         DataInputStream in;
         byte[] mensaje;
 
