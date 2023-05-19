@@ -81,15 +81,57 @@ public class ImpresionInmediata {
 
         Barcode128 barcode = new Barcode128(pdfDoc);
 
-        barcode.setCode(producto.getNombre() + " " + producto.getLote() + " " + producto.getPesoNeto().substring(0, 5).trim() + " " + producto.getUnidades());
+        barcode.setCode(generarFormatoCodigo(producto));
 
         //Se determina el tipo de codigo de barras 128
         barcode.setCodeType(Barcode128.CODE128);
 
         PdfFormXObject barcodeObject = barcode.createFormXObject(null, null, pdfDoc);
-        Cell cell = new Cell().add(new Image(barcodeObject));
 
-        return cell;
+        return new Cell().add(new Image(barcodeObject));
+
+    }
+
+    private String generarFormatoCodigo(Producto producto) {
+
+        String peso = producto.getPesoNeto().substring(0, 5).trim();
+
+        StringBuilder codigo = new StringBuilder();
+
+            for (int i = 0; i < 10; i++) {
+
+                if (i < producto.getNombre().length()) {
+                    codigo.append(producto.getNombre().charAt(i));
+                } else {
+                    codigo.append(' ');
+                }
+
+            }
+
+        for (int i = 0; i < 11; i++) {
+
+            if (i < producto.getLote().length()) {
+                codigo.append(producto.getLote().charAt(i));
+            } else {
+                codigo.append(' ');
+            }
+
+        }
+
+        for (int i = 0; i < 5; i++) {
+
+            if (i < peso.length()) {
+                codigo.append(peso.charAt(i));
+            } else {
+                codigo.append(' ');
+            }
+
+        }
+
+        codigo.append(producto.getUnidades());
+
+        return codigo.toString();
+
     }
 
 }
