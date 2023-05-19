@@ -1,0 +1,29 @@
+version: '2.18.1'
+services:
+  db:
+    image: mysql:8.0.18
+    environment:
+      MYSQL_DATABASE: antonativa
+      # So you don't have to use root, but you can if you like
+      MYSQL_USER: admin
+      # You can use whatever password you like
+      MYSQL_PASSWORD: echo3241
+      # Password for root access
+      MYSQL_ROOT_PASSWORD: echo3241
+    ports:
+      # <Port exposed> : < MySQL Port running inside container>
+      - 3306:3306
+
+  antonativa:
+
+    build:
+
+      context: .
+
+    ports:
+      - 5000:5000
+
+    environment:
+      MYSQL_DATASOURCE_URL: jdbc:mysql://db:3306/antonativa
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: echo3241
