@@ -60,7 +60,7 @@ public class ImpresionInmediata {
         PdfDocument pdfDoc = new PdfDocument(pdfWriter);
 
         Document documento = new Document(pdfDoc);
-        documento.setMargins(8F, 0F, 0F, 25F);
+        documento.setMargins(8F, 0F, 0F, 15F);
 
         documento.add(new Paragraph(producto.toString()).setFontSize(12F));
         documento.add(crearCodigoBarras(pdfDoc, producto));

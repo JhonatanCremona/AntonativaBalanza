@@ -1,7 +1,7 @@
 version: '2.18.1'
 services:
   db:
-    image: mysql:8.0.18
+    image: mysql:8.0.32
     environment:
       MYSQL_DATABASE: antonativa
       # So you don't have to use root, but you can if you like
