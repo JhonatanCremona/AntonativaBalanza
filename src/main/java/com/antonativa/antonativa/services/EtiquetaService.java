@@ -56,25 +56,29 @@ public class EtiquetaService implements IEtiquetaService {
     }
 
     public String getPesoNeto() {
-        final String HOST = "192.168.1.25";
+        final String HOST = "192.168.1.24";
         final int PORT = 3000;
         DataInputStream in;
         byte[] mensaje;
-
+        String resultado;
         try {
-
+            System.out.println("INICIO------------");
             Socket sc = new Socket(HOST, PORT);
+
             in = new DataInputStream(sc.getInputStream());
+            System.out.println("Antes de que sea asignado");
             mensaje = in.readNBytes(8);
+            System.out.println("Fin del mensaje: ");
             sc.close();
 
-            return ProcesamientoDatos.procesarDatosBalanza(mensaje) + " KG";
+            resultado =  ProcesamientoDatos.procesarDatosBalanza(mensaje) + " KG";
 
         } catch (IOException ex) {
-            Logger.getLogger(EtiquetaService.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Hola");
+            resultado = "Error";
         }
 
-        return null;
+        return resultado;
     }
 
     public void setEstadoById(long id) {

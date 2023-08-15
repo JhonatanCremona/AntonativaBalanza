@@ -40,12 +40,10 @@ public class Etiqueta {
     @Override
     public String toString() {
         return  "Producto: " + producto + "\n" +
-                "Lote: " + lote + "\n" +
-                "Fecha Vencimiento: " + fechaVencimiento.format(DateTimeFormatter.ofPattern("dd-MM-yyyy")) + "\n" +
+                "Lote: " + lote + "\t" +
                 "PesoNeto: " + pesoNeto + "\n" +
-                "Operario: " + operario + "\n" +
-                "Fecha: " + LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")) + "\t" +
-                "Hora: " + LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm"));
+                "Fecha Vencimiento: " + fechaVencimiento.format(DateTimeFormatter.ofPattern("dd-MM-yyyy")) + "\n" +
+                "Fecha: " + LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
     }
 
 }

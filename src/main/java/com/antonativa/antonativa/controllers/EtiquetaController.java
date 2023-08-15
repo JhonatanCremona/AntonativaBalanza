@@ -2,6 +2,7 @@ package com.antonativa.antonativa.controllers;
 
 import com.antonativa.antonativa.models.Etiqueta;
 import com.antonativa.antonativa.models.EtiquetaDTO;
+import com.antonativa.antonativa.models.EtiquetaImpresa;
 import com.antonativa.antonativa.models.Producto;
 import com.antonativa.antonativa.repository.ProductoRepository;
 import com.antonativa.antonativa.services.EtiquetaService;
@@ -43,31 +44,58 @@ public class EtiquetaController {
         return response;
     }
 
-    @GetMapping("/imprimir/{id}")
-    public String imprimir(@PathVariable long id) {
-
+    @GetMapping("/imprimir/{id}/{cant}")
+    public ResponseEntity<String> imprimir(@PathVariable long id, @PathVariable Integer cant) {
+        ResponseEntity<String> response = null;
         etiquetaService.setEstadoById(id);
         Etiqueta etiqueta = etiquetaService.findById(id);
         Producto producto;
 
         if (etiqueta.isEstado()) {
 
-            etiqueta.setPesoNeto(etiquetaService.getPesoNeto());
+            for (int i=1; i<= cant; i++ ) {
+                etiqueta.setPesoNeto(etiquetaService.getPesoNeto());
 
-                if(etiqueta.getPesoNeto() != null) {
-
+                if(!etiqueta.getPesoNeto().equals("Error")) {
                     producto = new Producto(etiqueta.getId(), etiqueta.getProducto(),
                             etiqueta.getLote(), etiqueta.getFechaVencimiento(),
                             etiqueta.getPesoNeto(), LocalDateTime.now(), etiqueta.getOperario(), etiqueta.getUnidades());
 
                     productoRepository.save(producto);
-
                     //Se realiza la impresion
                     ImpresionInmediata.imprimirEtiqueta(producto);
-                }
+                    response = ResponseEntity.status(HttpStatus.ACCEPTED).body("La etiqueta se imprimio exitosamente");
+                } else response = ResponseEntity.status(HttpStatus.NOT_FOUND).body("Error Modulo");
+            }
         }
+        return response;
+    }
+    @PostMapping("/imprimir")
+    public ResponseEntity<String> ImprimirenBaseCantidad (@RequestBody EtiquetaImpresa etiquetaImpresa) {
+        ResponseEntity<String> response = null;
+        etiquetaService.setEstadoById(etiquetaImpresa.getId());
+        Etiqueta etiqueta = etiquetaService.findById(etiquetaImpresa.getId());
+        Producto producto;
+        System.out.println(etiquetaImpresa.getCantidad());
 
-        return "Impresion realizada";
+        if (etiqueta.isEstado()) {
+
+            for (int i=1; i<= 4; i++ ) {
+                etiqueta.setPesoNeto(etiquetaService.getPesoNeto());
+
+                if(!etiqueta.getPesoNeto().equals("Error")) {
+                    producto = new Producto(etiqueta.getId(), etiqueta.getProducto(),
+                            etiqueta.getLote(), etiqueta.getFechaVencimiento(),
+                            etiqueta.getPesoNeto(), LocalDateTime.now(), etiqueta.getOperario(), etiqueta.getUnidades());
+
+                    productoRepository.save(producto);
+                    //Se realiza la impresion
+                    ImpresionInmediata.imprimirEtiqueta(producto);
+                    response = ResponseEntity.status(HttpStatus.ACCEPTED).body("La etiqueta se imprimio exitosamente");
+                } else response = ResponseEntity.status(HttpStatus.NOT_FOUND).body("Error Modulo");
+            }
+        }
+        return response;
     }
 
 }

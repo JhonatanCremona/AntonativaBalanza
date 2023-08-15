@@ -86,6 +86,8 @@ public class ImpresionInmediata {
         //Se determina el tipo de codigo de barras 128
         barcode.setCodeType(Barcode128.CODE128);
 
+        barcode.setBarHeight(45f);
+
         PdfFormXObject barcodeObject = barcode.createFormXObject(null, null, pdfDoc);
 
         return new Cell().add(new Image(barcodeObject));
