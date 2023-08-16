@@ -51,6 +51,15 @@ public class EtiquetaService implements IEtiquetaService {
         etiquetaRepository.deleteById(id);
     }
 
+    public void modificarEtiqueta(EtiquetaDTO etiquetaDTO) {
+
+        etiquetaRepository.setProductoById(etiquetaDTO.getId(), etiquetaDTO.getProducto());
+        etiquetaRepository.setLoteById(etiquetaDTO.getId(), etiquetaDTO.getLote());
+        etiquetaRepository.setFechaVencimientoById(etiquetaDTO.getId(), etiquetaDTO.getFechaVencimiento());
+        etiquetaRepository.setUnidadesById(etiquetaDTO.getId(), etiquetaDTO.getUnidades());
+
+    }
+
     public boolean obtenerEtiqueta(Long id) {
         return etiquetaRepository.findById(id).isPresent();
     }

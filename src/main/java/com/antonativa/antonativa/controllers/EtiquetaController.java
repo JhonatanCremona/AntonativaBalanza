@@ -44,6 +44,18 @@ public class EtiquetaController {
         return response;
     }
 
+    @PutMapping("/modificar")
+    public ResponseEntity<String> update(@RequestBody EtiquetaDTO etiquetaDto) {
+        ResponseEntity<String> response = null;
+        if (etiquetaService.obtenerEtiqueta(etiquetaDto.getId())) {
+            etiquetaService.modificarEtiqueta(etiquetaDto);
+            response = ResponseEntity.status(HttpStatus.NO_CONTENT).body("Modificando Plantilla");
+        } else {
+            response = ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+        return response;
+    }
+
     @GetMapping("/imprimir/{id}/{cant}")
     public ResponseEntity<String> imprimir(@PathVariable long id, @PathVariable Integer cant) {
         ResponseEntity<String> response = null;
